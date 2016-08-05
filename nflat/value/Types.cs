@@ -81,5 +81,8 @@ namespace NFlat.Micro
         {
             return type.IsGenericType && (type.GetGenericTypeDefinition() == genericType);
         }
+
+        internal static bool IsStatic(this Type type)
+            => type.IsAbstract && type.IsSealed;
     }
 }

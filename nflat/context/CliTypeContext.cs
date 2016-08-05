@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using System.Reflection.Emit;
 
 namespace NFlat.Micro
@@ -11,8 +12,7 @@ namespace NFlat.Micro
         {
         }
 
-        public override void CompileToField(Identifier name, Type type,
-                                            bool hasThis)
+        public override void CompileToField(Identifier name, Type type, bool hasThis)
         {
             throw Error.NewMemberToExistingType();
         }
@@ -22,7 +22,8 @@ namespace NFlat.Micro
             throw Error.NewMemberToExistingType();
         }
 
-        protected override TypeBuilder GetTypeBuilder(string name, Type baseType)
+        protected override TypeBuilder GetTypeBuilder(string name, TypeAttributes flags,
+                                                      Type baseType)
         {
             throw Error.NewMemberToExistingType();
         }

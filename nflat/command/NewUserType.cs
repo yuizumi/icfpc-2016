@@ -27,4 +27,18 @@ namespace NFlat.Micro
             ctx.CompileToStruct(Pop<NewEntity>(ctx.Stack).Name);
         }
     }
+
+    internal class NewUserModule : Keyword, IDeclareCommand
+    {
+        internal const string _Text = "モジュール";
+        internal override string Text => _Text;
+
+        internal override ICommand Parse() => this;
+
+        public void Declare(IDeclareContext ctx)
+        {
+            if (ctx.Stack.Count != 1) { throw Error.InvalidUsage(this); }
+            ctx.CompileToModule(Pop<NewEntity>(ctx.Stack).Name);
+        }
+    }
 }

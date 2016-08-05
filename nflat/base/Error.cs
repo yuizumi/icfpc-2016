@@ -39,6 +39,9 @@ namespace NFlat.Micro
             }
         }
 
+        internal static NFlatException InsufficientValues() =>
+            _($"値が不足しています。");
+
         internal static NFlatException InvalidBracket(Bracket bracket) =>
             _($"「{bracket.Open}」の使い方が正しくありません。");
 
@@ -62,9 +65,6 @@ namespace NFlat.Micro
 
         internal static NFlatException InvalidUsage(Keyword keyword) =>
             _($"「{keyword.Text}」の使い方が正しくありません。");
-
-        internal static NFlatException InsufficientValues() =>
-            _($"値が不足しています。");
 
         internal static NFlatException MemberDefinedOutsideType() =>
             _($"型の外側でメンバーを定義することはできません。");
@@ -93,6 +93,9 @@ namespace NFlat.Micro
         internal static NFlatException NoOverloadsWithArity(CliMethodGroup methodGroup,
                                                             int arity) =>
             _($"{methodGroup.Message}に {arity} 引数のオーバーロードは存在しません。");
+
+        internal static NFlatException NonStaticMemberInModule() =>
+            _($"モジュールに通常のメンバーを定義することはできません。");
 
         internal static NFlatException NotAssignable(IValue target, IValue source) =>
             _($"{target.Message}に{source.Message}を代入することはできません。");

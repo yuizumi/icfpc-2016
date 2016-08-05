@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Reflection.Emit;
+
+using TA = System.Reflection.TypeAttributes;
 
 namespace NFlat.Micro
 {
@@ -35,19 +38,24 @@ namespace NFlat.Micro
         }
 
         public void CompileToClass(Identifier name)
-            => CompileToType(name, typeof(object));
+            => CompileToType(name, TA.Public, typeof(object));
 
         public void CompileToStruct(Identifier name)
-            => CompileToType(name, typeof(ValueType));
+            => CompileToType(name, TA.Public, typeof(ValueType));
+
+        public void CompileToModule(Identifier name)
+            => CompileToType(name, TA.Public | TA.Abstract | TA.Sealed, typeof(object));
 
         public abstract void CompileToField(Identifier name, Type type, bool hasThis);
         public abstract void CompileToMethod(Identifier name, bool hasThis);
 
-        protected abstract TypeBuilder GetTypeBuilder(string name, Type baseType);
+        protected abstract TypeBuilder GetTypeBuilder(string name, TypeAttributes flags,
+                                                      Type baseType);
 
-        private void CompileToType(Identifier name, Type baseType)
+        private void CompileToType(Identifier name, TypeAttributes flags, Type baseType)
         {
-            var userType = new UserType(TypePool, GetTypeBuilder(name.Text, baseType));
+            TypeBuilder builder = GetTypeBuilder(name.Text, flags, baseType);
+            var userType = new UserType(TypePool, builder);
             Bindings.Define(name, userType);
             mUserTypes.Add(userType);
             (new UserTypeContext(this, userType, Source.NextBlock())).Compile();

@@ -1,7 +1,6 @@
 using System;
+using System.Reflection;
 using System.Reflection.Emit;
-
-using TA = System.Reflection.TypeAttributes;
 
 namespace NFlat.Micro
 {
@@ -22,8 +21,7 @@ namespace NFlat.Micro
         public override TypePool  TypePool { get; } = new TypePool();
         public override DeclareStack Stack { get; } = new DeclareStack();
 
-        public override void CompileToField(Identifier name, Type type,
-                                            bool hasThis)
+        public override void CompileToField(Identifier name, Type type, bool hasThis)
         {
             throw Error.MemberDefinedOutsideType();
         }
@@ -33,7 +31,10 @@ namespace NFlat.Micro
             throw Error.MemberDefinedOutsideType();
         }
 
-        protected override TypeBuilder GetTypeBuilder(string name, Type baseType)
-            => mModule.DefineType(name, TA.Public, baseType);
+        protected override TypeBuilder GetTypeBuilder(string name, TypeAttributes flags,
+                                                      Type baseType)
+        {
+            return mModule.DefineType(name, flags, baseType);
+        }
     }
 }

@@ -26,6 +26,16 @@ namespace NFlat.Micro
 
         internal TypeBuilder Builder { get; }
 
+        private string Modifiers
+        {
+            get {
+                if (Type.IsStatic()) return "public static";
+                if (Type.IsSealed  ) return "public sealed";
+                if (Type.IsAbstract) return "public abstract";
+                return "public";
+            }
+        }
+
         private string Keyword
         {
             get {
@@ -33,7 +43,6 @@ namespace NFlat.Micro
                 if (Type.IsClass) return "class";
                 if (Type.IsInterface) return "interface";
                 if (Type.IsValueType) return "struct";
-
                 throw new NFlatBugException();
             }
         }
@@ -45,12 +54,9 @@ namespace NFlat.Micro
             return base.FindMember(name);
         }
 
-        internal TypeBuilder GetTypeBuilder(string name, Type baseType)
-            => Builder.DefineNestedType(name, TA.Public, baseType);
-
         public void Write(TextWriter writer)
         {
-            writer.Write($"public {Keyword} {Builder.Name} {{\n");
+            writer.Write($"{Modifiers} {Keyword} {Builder.Name} {{\n");
             foreach (var member in Members.Values.OfType<IUserTypeMember>()) {
                 member.Write(writer);
             }
