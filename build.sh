@@ -15,5 +15,4 @@ compile() {
 
 cd "${0%/*}"
 mkdir -p bin
-compile rest src/aliases.nf src/rest.nf
-
+compile fetch src/{aliases,basic,json,fetch}.nf

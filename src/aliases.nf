@@ -13,10 +13,15 @@
 　　文字列は　|ToString|の　別名
 
 文字列型は　|T:System.String|の　別名
-　　連結は　|Concat|（２引数）の　別名
+　　連結は　|Concat|の　別名
+　　整形は　|Format|の　別名
+
+プロセスは　|T:System.Diagnostics.Process,System|の　別名
+　　開始は　|Start|の　別名
+　　終了待ちは　|WaitForExit|の　別名
 
 ファイルは　|T:System.IO.File|の　別名
-　　テキスト書出は　|WriteAllText|の　別名
+　　存在は　|Exists|の　別名
 
 パスは　|T:System.IO.Path|の　別名
 　　連結は　|Combine|の　別名
@@ -26,9 +31,11 @@
 ストリーム出力型は　|T:System.IO.StreamWriter|の　別名
 
 テキスト入力型は　|T:System.IO.TextReader|の　別名
+　　閉じるは　|Close|の　別名
 　　全部読出は　|ReadToEnd|の　別名
 
 テキスト出力型は　|T:System.IO.TextWriter|の　別名
+　　閉じるは　|Close|の　別名
 　　書出は　|Write|（１引数）の　別名
 　　改行付書出は　|WriteLine|（１引数）の　別名
 
@@ -44,15 +51,13 @@ WebRequestは　|T:System.Net.WebRequest,System|の　別名
 　　作成は　|Create|の　別名
 　　レスポンス取得は　|GetResponse|の　別名
 　　ヘッダーは　|Headers|の　別名
+　　URIは　|RequestUri|の　別名
 
 WebResponseは　|T:System.Net.WebResponse,System|の　別名
 　　閉じるは　|Close|の　別名
 　　ストリーム取得は　|GetResponseStream|の　別名
 
-JSONオブジェクト型は　|T:Newtonsoft.Json.Linq.JObject,Newtonsoft.Json|の　別名
+JSON型は　|T:Newtonsoft.Json.Linq.JToken,Newtonsoft.Json|の　別名
 　　変換は　|Parse|の　別名
-
-JSON値型は　|T:Newtonsoft.Json.Linq.JToken,Newtonsoft.Json|の　別名
-　　オブジェクトに変換は　|ToObject|（１引数）の　別名
 
 返すは　無処理の　別名
