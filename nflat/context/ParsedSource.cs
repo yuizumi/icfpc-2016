@@ -11,26 +11,32 @@ namespace NFlat.Micro
         private int mIndex;
         private int mExitIndex;
 
-        private ParsedSource(IReadOnlyList<ICommand> commands, int lineNumber,
-                             int minIndex, int maxIndex)
+        private ParsedSource(IReadOnlyList<ICommand> commands, string filename,
+                             int lineNumber, int minIndex, int maxIndex)
         {
             mCommands = commands;
             mIndex = minIndex;
             mMaxIndex = maxIndex;
+            FileName = filename;
             LineNumber = lineNumber;
             mExitIndex = maxIndex;
         }
 
         internal ParsedSource(IReadOnlyList<ICommand> commands)
-            : this(commands, 0, 0, commands.Count - 1)
+            : this(commands, "＜不明＞", 0, 0, commands.Count - 1)
         {
         }
 
-        public int LineNumber { get; private set; }
+        public string FileName { get; private set; }
+        public int  LineNumber { get; private set; }
 
         private bool Seek()
         {
             for (; mIndex <= mMaxIndex; mIndex++) {
+                if (mCommands[mIndex] is SetFile) {
+                    FileName   = (mCommands[mIndex] as SetFile).  Name;
+                    continue;
+                }
                 if (mCommands[mIndex] is SetLine) {
                     LineNumber = (mCommands[mIndex] as SetLine).Number;
                     continue;
@@ -59,7 +65,7 @@ namespace NFlat.Micro
         {
             int index = mIndex;
             mIndex = mExitIndex + 1;
-            return new ParsedSource(mCommands, LineNumber, index, mExitIndex);
+            return new ParsedSource(mCommands, FileName, LineNumber, index, mExitIndex);
         }
 
         internal void Dump(TextWriter writer)

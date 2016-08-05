@@ -29,7 +29,7 @@ namespace NFlat.Micro
                 while (Source.Peek() != null)
                     Source.Next().Compile(this);
             } catch (NFlatException e) {
-                throw new NFlatLineNumberedException(e, Source.LineNumber);
+                throw new NFlatLineNumberedException(e, Source.FileName, Source.LineNumber);
             }
         }
 

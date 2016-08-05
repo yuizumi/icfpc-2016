@@ -10,7 +10,9 @@ namespace NFlat.Micro
         private Stack<Block> mThenBlocks;
         private Stack<Block> mLineBlocks;
 
-        private int mLineNumber;
+        private string mFileName;
+        private int  mLineNumber;
+
         private int mIndent;
 
         internal static IParsedSource Parse(IReadOnlyList<Token> tokens)
@@ -19,7 +21,7 @@ namespace NFlat.Micro
             try {
                 parser.DoParse(tokens);
             } catch (NFlatException e) {
-                throw new NFlatLineNumberedException(e, parser.mLineNumber);
+                throw new NFlatLineNumberedException(e, parser.mFileName, parser.mLineNumber);
             }
             return new ParsedSource(parser.mCommands.AsReadOnly());
         }
@@ -31,6 +33,10 @@ namespace NFlat.Micro
             mLineBlocks = new Stack<Block>();
 
             for (int i = 0; i < tokens.Count; i++) {
+                if (tokens[i].Stem is File) {
+                    ParseFile(tokens[i].Stem as File);
+                    continue;
+                }
                 if (tokens[i].Stem is Line) {
                     ParseLine(tokens[i].Stem as Line, tokens[i + 1]);
                     continue;
@@ -55,6 +61,14 @@ namespace NFlat.Micro
 
             ResolveBlocks(mThenBlocks, 0);
             ResolveBlocks(mLineBlocks, 0);
+        }
+
+        private void ParseFile(File file)
+        {
+            ResolveBlocks(mThenBlocks, 0);
+            ResolveBlocks(mLineBlocks, 0);
+            mFileName = file.Name;
+            mCommands.Add(new SetFile(mFileName));
         }
 
         private void ParseLine(Line line, Token next)

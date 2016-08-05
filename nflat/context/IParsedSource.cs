@@ -2,7 +2,8 @@ namespace NFlat.Micro
 {
     internal interface IParsedSource
     {
-        int LineNumber { get; }
+        string FileName { get; }
+        int  LineNumber { get; }
 
         ICommand Peek();
         ICommand Next();

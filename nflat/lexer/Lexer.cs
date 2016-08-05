@@ -9,17 +9,23 @@ namespace NFlat.Micro
 
     internal static class Lexer
     {
-        internal static IReadOnlyList<Token> Parse(TextReader reader)
+        internal static void Parse(string filename, List<Token> tokens)
         {
-            var tokens = new List<Token>();
+            tokens.Add(new Token(new File(filename), Suffix.None));
+            using (var reader = new StreamReader(filename))
+                Parse(reader, tokens, filename);
+        }
+
+        private static void Parse(TextReader reader, List<Token> tokens,
+                                  string filename)
+        {
             int lineno = 0;
             try {
                 for (string line; (line = reader.ReadLine()) != null; )
                     tokens.AddRange(ParseLine(line, ++lineno));
             } catch (NFlatException e) {
-                throw new NFlatLineNumberedException(e, lineno);
+                throw new NFlatLineNumberedException(e, filename, lineno);
             }
-            return tokens.AsReadOnly();
         }
 
         private static IEnumerable<Token> ParseLine(string line, int lineno)

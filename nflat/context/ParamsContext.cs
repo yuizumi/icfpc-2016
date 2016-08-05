@@ -21,7 +21,7 @@ namespace NFlat.Micro
                     Resolve(Source.Next()).Compile(this);
                 }
             } catch (NFlatException e) {
-                throw new NFlatLineNumberedException(e, Source.LineNumber);
+                throw new NFlatLineNumberedException(e, Source.FileName, Source.LineNumber);
             }
         }
 

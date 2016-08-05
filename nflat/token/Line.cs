@@ -11,7 +11,7 @@ namespace NFlat.Micro
         internal int Number { get; }
         internal int Indent { get; }
 
-        internal override string Text => $"〔{Number} 行目〕";
+        internal override string Text => $"行：{Number}";
 
         internal override ICommand Parse()
         {
