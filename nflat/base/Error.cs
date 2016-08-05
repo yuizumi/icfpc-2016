@@ -144,6 +144,9 @@ namespace NFlat.Micro
         internal static NFlatException OutsideLoop(Stem stem) =>
             _($"「{stem.Text}」を繰り返しの外側で使うことはできません。");
 
+        internal static NFlatException TypeNotConvertible(Type src, Type dst) =>
+            _($"|T:{src}| を |T:{dst}| に変換することはできません。");
+
         internal static NFlatException TypeNotFound(string name) =>
             _($"「{name}」という名前の型は存在しません。");
 
