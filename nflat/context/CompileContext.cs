@@ -53,6 +53,12 @@ namespace NFlat.Micro
             return new LoopContext(this, name, Source.NextBlock());
         }
 
+        public ICompileContext InitContext(string name)
+        {
+            Stack.ForceEvaluate();
+            return new InitContext(this, name, Source.NextBlock());
+        }
+
         public override string ToString() => $"{GetType().Name}({Name})";
     }
 }

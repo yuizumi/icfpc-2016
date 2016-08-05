@@ -12,7 +12,13 @@ namespace NFlat.Micro
             var type = Pop<TypeValue>(ctx.Stack).NFType.Type;
             var name = Pop<NewEntity>(ctx.Stack).Name;
             var expr = new CSharpExpr(name.CSharp, type);
-            ctx.Output.RawEmit($"{CSharpString.Type(expr.Type)} {expr.Code};");
+            string code = $"{CSharpString.Type(expr.Type)} {expr.Code}";
+            if (ctx.Source.Peek() is InitialValue) {
+                var value = (ctx.Source.Next() as InitialValue).Compile(ctx, type);
+                ctx.Output.RawEmit($"{code} = {value};");
+            } else {
+                ctx.Output.RawEmit($"{code};");
+            }
             ctx.Bindings.Define(name, new Variable(expr, name));
         }
     }

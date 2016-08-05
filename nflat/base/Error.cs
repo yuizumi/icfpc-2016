@@ -51,6 +51,9 @@ namespace NFlat.Micro
         internal static NFlatException InvalidBracket(Bracket bracket) =>
             _($"「{bracket.Open}」の使い方が正しくありません。");
 
+        internal static NFlatException InvalidCall(IContext ctx, Keyword keyword) =>
+            _($"「{ctx.Name}」の中で{keyword.Message}を呼び出すことはできません。");
+
         internal static NFlatException InvalidDimension(int dimension) =>
             _($"{dimension}次元の配列を作ることはできません。");
 
@@ -59,6 +62,9 @@ namespace NFlat.Micro
 
         internal static NFlatException InvalidIndexArgument(Stem stem) =>
             _($"「{stem.Text}」を添字として使用することはできません。");
+
+        internal static NFlatException InvalidInitialValue() =>
+            _($"初期値の指定が正しくありません。");
 
         internal static NFlatException InvalidToken(string text) =>
             _($"「{text}」は正しい字句ではありません。");

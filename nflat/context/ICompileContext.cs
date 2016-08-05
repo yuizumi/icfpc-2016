@@ -15,5 +15,6 @@ namespace NFlat.Micro
 
         ICompileContext CondContext(string name);
         ICompileContext LoopContext(string name);
+        ICompileContext InitContext(string name);
     }
 }
