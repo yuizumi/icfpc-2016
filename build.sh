@@ -4,6 +4,7 @@ set -e
 
 declare -ar DEPS=(
     /r:packages/Newtonsoft.Json.9.0.1/lib/net45/Newtonsoft.Json.dll
+    /r:packages/Rationals.1.2.0/lib/net461/Rationals.dll
 )
 
 compile() {
@@ -15,4 +16,4 @@ compile() {
 
 cd "${0%/*}"
 mkdir -p bin
-compile fetch src/{aliases,basic,json,fetch}.nf
+compile fetch alias/*.nf src/{basic,json,fetch}.nf
