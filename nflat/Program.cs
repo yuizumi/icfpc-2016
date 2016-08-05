@@ -24,9 +24,12 @@ namespace NFlat.Micro
                     new AssemblyName {Name = "Main"},
                     AssemblyBuilderAccess.ReflectionOnly);
                 ModuleBuilder module = assembly.DefineDynamicModule("Main.exe");
+
                 var ctx = new RootContext(source, module);
                 ctx.Compile();
-                foreach (var userType in ctx.UserTypes) userType.Write(Console.Out);
+                Console.WriteLine("#pragma warning disable 0219");
+                foreach (var userType in ctx.UserTypes)
+                    userType.Write(Console.Out);
             } catch (NFlatLineNumberedException e) {
                 Console.Error.WriteLine($"エラー ― {e.Message}");
                 return 1;
