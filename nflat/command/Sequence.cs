@@ -10,6 +10,11 @@ namespace NFlat.Micro
             Commands = commands;
         }
 
+        internal Sequence(params ICommand[] commands)
+        {
+            Commands = commands;
+        }
+
         internal IEnumerable<ICommand> Commands { get; }
         public string Message => "内部命令";
 

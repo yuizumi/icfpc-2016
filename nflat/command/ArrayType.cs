@@ -1,6 +1,6 @@
 namespace NFlat.Micro
 {
-    internal class ArrayType : ArrayKeyword, ICompileCommand, IDeclareCommand
+    internal class ArrayType : KeywordPlus, ICompileCommand, IDeclareCommand
     {
         internal const string _Text = "配列";
 
@@ -8,6 +8,7 @@ namespace NFlat.Micro
 
         private ArrayType(int dimension)
         {
+            if (dimension <= 0) throw Error.InvalidDimension(dimension);
             mDimension = dimension;
         }
 
@@ -25,8 +26,8 @@ namespace NFlat.Micro
         public void Declare(IDeclareContext ctx)
             => Process(ctx, ctx.Stack);
 
-        internal override Stem WithDimension(int dimension)
-            => new ArrayType(dimension);
+        internal override Stem WithSpec(int value)
+            => new ArrayType(value);
 
         private void Process(IContext ctx, NFStack stack)
         {

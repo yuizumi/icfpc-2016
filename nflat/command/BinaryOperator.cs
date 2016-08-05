@@ -12,6 +12,7 @@ namespace NFlat.Micro
 
         public void Compile(ICompileContext ctx)
         {
+            ctx.Stack.ForceEvaluate();
             var y = ctx.Stack.Pop();
             var x = ctx.Stack.Pop();
             ctx.Output.Emit(GetExpression(x, y));

@@ -127,6 +127,9 @@ namespace NFlat.Micro
         internal static NFlatException NotRedefinable(Stem stem) =>
             _($"「{stem.Text}」の再定義はできません。");
 
+        internal static NFlatException NotThrowable(IValue value) =>
+            _($"{value.Message}を投げることはできません。");
+
         internal static NFlatException NotTypeCommand(ICommand command) =>
             _($"{command.Message}は型ではありません。");
 

@@ -3,30 +3,25 @@ using System.Linq.Expressions;
 
 namespace NFlat.Micro
 {
-    internal class NegOperator : Keyword, ICompileCommand
+    internal abstract class UnaryOperator : Keyword, ICompileCommand
     {
-        internal const string _Text = "符号反転";
-        internal override string Text => _Text;
-
         internal override ICommand Parse() => this;
 
         public void Compile(ICompileContext ctx)
         {
+            ctx.Stack.ForceEvaluate();
             var x = ctx.Stack.Pop();
-            ctx.Output.Emit(GetExpression(x));
-        }
-
-        private CSharpExpr GetExpression(IValue x)
-        {
             var xDummy = Expression.Parameter(x.Type);
             Type type;
             try {
-                type = Expression.Negate(xDummy).Type;
+                type = GetExpression(xDummy).Type;
             } catch (InvalidOperationException) {
                 throw Error.OperatorNotApplicable(this, x.Type);
             }
-            string xCode = x.Get(x.Type).Code;
-            return new CSharpExpr($"-{xCode}", type);
+            ctx.Output.Emit(new CSharpExpr(GetCode(x), type));
         }
+
+        protected abstract Expression GetExpression(Expression x);
+        protected abstract string GetCode(IValue x);
     }
 }

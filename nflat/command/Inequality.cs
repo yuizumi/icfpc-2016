@@ -9,9 +9,11 @@ namespace NFlat.Micro
 
         public void Compile(ICompileContext ctx)
         {
+            ctx.Stack.ForceEvaluate();
             var y = ctx.Stack.Pop();
             var x = ctx.Stack.Pop();
-            ctx.Output.Emit(new CSharpExpr($"!{Equality.GetCode(x, y)}", typeof(bool)));
+            ctx.Output.Emit(
+                new CSharpExpr($"!{Equality.GetCode(x, y)}", typeof(bool)));
         }
     }
 }

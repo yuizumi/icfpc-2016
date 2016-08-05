@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace NFlat.Micro
 {
-    internal class MakeArray : ArrayKeyword, ICompileCommand
+    internal class MakeArray : KeywordPlus, ICompileCommand
     {
         internal const string _Text = "配列作成";
 
@@ -11,6 +11,7 @@ namespace NFlat.Micro
 
         private MakeArray(int dimension)
         {
+            if (dimension <= 0) throw Error.InvalidDimension(dimension);
             mDimension = dimension;
         }
 
@@ -20,8 +21,8 @@ namespace NFlat.Micro
 
         internal override ICommand Parse() => this;
 
-        internal override Stem WithDimension(int dimension)
-            => new MakeArray(dimension);
+        internal override Stem WithSpec(int value)
+            => new MakeArray(value);
 
         public void Compile(ICompileContext ctx)
         {
