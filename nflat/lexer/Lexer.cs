@@ -40,7 +40,7 @@ namespace NFlat.Micro
                 yield return Matchers.MatchToken(word);
         }
 
-        private static IEnumerable<string> SplitLine(string line, int index)
+        internal static IEnumerable<string> SplitLine(string line, int index)
         {
             var text = new StringBuilder(line).Append('\n');
 

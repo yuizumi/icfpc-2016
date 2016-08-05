@@ -6,7 +6,7 @@ namespace NFlat.Micro
 {
     internal class IndexesMatcher : BasicMatcher
     {
-        private const string Pattern = @"(?<head>" + Patterns.Identifier + ")\\[.+\\]";
+        private const string Pattern = "(?<head>" + Patterns.Identifier + @")\[\S+\]";
 
         private static readonly Regex IndexRegex =
             new Regex(@"\[(?<args>.+?)\]", RegexOptions.Compiled);
@@ -31,17 +31,19 @@ namespace NFlat.Micro
 
         private static IndexStem ParseIndex(Match match)
         {
-            List<Stem> args = match.Groups["args"].Value.Split('、')
-                .Select(Matchers.MatchStem).ToList();
-            Stem error = args.FirstOrDefault(x => !IsValidArgument(x));
-            if (error != null) throw Error.InvalidIndexArgument(error);
+            string text = match.Groups["args"].Value;
+            var args = new List<Stem>();
+            foreach (string word in Lexer.SplitLine(text, 0)) {
+                var arg = Matchers.MatchStem(word);
+                if (!IsValidArgument(arg)) throw Error.InvalidIndexArgument(arg);
+                args.Add(arg);
+            }
             return new IndexStem(args);
         }
 
-        private static bool IsValidArgument(Stem stem)
+        private static bool IsValidArgument(Stem arg)
         {
-            return (stem is Identifier)
-                || (stem is NumberLiteral) || (stem is StringLiteral);
+            return (arg is Identifier) || (arg is NumberLiteral) || (arg is StringLiteral);
         }
     }
 }

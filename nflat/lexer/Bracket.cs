@@ -27,11 +27,11 @@ namespace NFlat.Micro
         private static IEnumerable<Bracket> GetAllBrackets()
         {
             // Supplementals, comments.
-            yield return new Bracket('(', ')', false, true);
+            yield return new Bracket('(', ')', false, true );
             // Indexes, math expressions.
-            yield return new Bracket('[', ']', false, true);
+            yield return new Bracket('[', ']', false, false);
             // CLI type names, raw identifiers.
-            yield return new Bracket('|', '|', true, false);
+            yield return new Bracket('|', '|', true , false);
             // String literals.
             yield return new Bracket('「', '」', true, false);
             yield return new Bracket('\"', '\"', true, false);
