@@ -12,6 +12,11 @@ namespace NFlat.Micro
         {
         }
 
+        public override void Import(NFType nftype)
+        {
+            throw Error.ImportToExistingType();
+        }
+
         public override void CompileToField(Identifier name, Type type, bool hasThis)
         {
             throw Error.NewMemberToExistingType();

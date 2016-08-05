@@ -9,6 +9,8 @@ namespace NFlat.Micro
 
         void Compile();
 
+        void Import(NFType nftype);
+
         void CompileToClass(Identifier name);
         void CompileToStruct(Identifier name);
         void CompileToModule(Identifier name);

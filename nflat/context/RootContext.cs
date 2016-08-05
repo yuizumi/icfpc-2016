@@ -17,6 +17,11 @@ namespace NFlat.Micro
         public override IContext Parent => null;
         public override string Name => mModule.Name;
 
+        public override void Import(NFType nftype)
+        {
+            throw Error.ImportOutsideType();
+        }
+
         public override IBindings Bindings { get; } = new Bindings(null);
         public override TypePool  TypePool { get; } = new TypePool();
         public override DeclareStack Stack { get; } = new DeclareStack();

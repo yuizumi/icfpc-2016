@@ -37,6 +37,8 @@ namespace NFlat.Micro
             }
         }
 
+        public abstract void Import(NFType nftype);
+
         public void CompileToClass(Identifier name)
             => CompileToType(name, TA.Public, typeof(object));
 

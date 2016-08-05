@@ -21,6 +21,12 @@ namespace NFlat.Micro
         internal static NFlatException IdentifierExpected(string text) =>
             _($"「{text}」は識別子ではありません。");
 
+        internal static NFlatException ImportOutsideType() =>
+            _($"型の外側でモジュールを使用することはできません。");
+
+        internal static NFlatException ImportToExistingType() =>
+            _($"既存の型でモジュールを使用することはできません。");
+
         internal static NFlatException IncompleteDefinition(Identifier name) =>
             _($"「{name.Text}」が正しく定義されていません。");
 
@@ -83,6 +89,9 @@ namespace NFlat.Micro
 
         internal static NFlatException MultipleConstraints() =>
             _($"引数の制約を重ねて指定することはできません。");
+
+        internal static NFlatException MultipleMatchesImported(Identifier name) =>
+            _($"複数の型で「{name.Text}」が定義されています。");
 
         internal static NFlatException MultipleReturnValues() =>
             _($"複数の戻り値を返すことはできません。");

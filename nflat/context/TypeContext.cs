@@ -1,10 +1,14 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection.Emit;
 
 namespace NFlat.Micro
 {
     internal abstract class TypeContext : DeclareContext, IBindings
     {
+        private readonly List<NFType> mImports = new List<NFType>();
+
         protected TypeContext(IDeclareContext parent, NFType nftype,
                               IParsedSource source)
             : base(source)
@@ -23,6 +27,11 @@ namespace NFlat.Micro
 
         internal NFType NFType { get; }
 
+        public override void Import(NFType nftype)
+        {
+            mImports.Add(nftype);
+        }
+
         void IBindings.Define(Identifier name, ICommand command)
         {
             if (!(command is ITypeMember)) throw Error.NotTypeMember(command);
@@ -31,7 +40,22 @@ namespace NFlat.Micro
 
         ICommand IResolver.Resolve(Identifier name)
         {
-            return NFType.FindMember(name) ?? Parent.Bindings.Resolve(name);
+            return NFType.FindMember(name) ?? Parent.Bindings.Resolve(name) ??
+                ResolveFromImports(name);
+        }
+
+        private ICommand ResolveFromImports(Identifier name)
+        {
+            var resolved = mImports.Select(nftype => nftype.FindMember(name))
+                .Where(m => m != null).ToList();
+            switch (resolved.Count) {
+                case 0:
+                    return null;
+                case 1:
+                    return resolved[0];
+                default:
+                    throw Error.MultipleMatchesImported(name);
+            }
         }
     }
 }
