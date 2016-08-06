@@ -31,7 +31,9 @@
 ※　その他
 
 コンソールは　|T:System.Console|の　別名
-　　出力は　|Out|の　別名
+　　表示は　|Write|（１引数）の　別名
+　　改行は　|WriteLine|（０引数）の　別名
+　　表示改行は　|WriteLine|（１引数）の　別名
 
 基本例外型は　|T:System.Exception|の　別名
 
