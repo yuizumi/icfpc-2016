@@ -57,7 +57,7 @@ namespace NFlat.Micro
                     throw Error.MultipleReturnValues();
             }
 
-            if (ReturnType != returnType)
+            if (!returnType.HasImplicitTo(ReturnType))
                 throw Error.InconsistentReturnType();
             subctx.Stack.MarkAsUnused();
         }
