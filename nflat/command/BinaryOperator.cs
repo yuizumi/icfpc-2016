@@ -18,27 +18,32 @@ namespace NFlat.Micro
             ctx.Output.Emit(GetExpression(x, y));
         }
 
-        private CSharpExpr GetExpression(IValue x, IValue y)
+        internal CSharpExpr GetExpression(IValue x, IValue y)
         {
-            Type xType = x.Type;
-            Type yType = y.Type;
+            CSharpExpr expr = default(CSharpExpr);
+            if (TryGetExpr(x, x.Type, y, y.Type, ref expr)) { return expr; }
+            if (TryGetExpr(x, x.Type, y, x.Type, ref expr)) { return expr; }
+            if (TryGetExpr(x, y.Type, y, y.Type, ref expr)) { return expr; }
+            throw Error.OperatorNotApplicable(this, x.Type, y.Type);
+        }
 
-            if (xType.IsPrimitive && yType.IsPrimitive) {
-                if (x.Has(yType)) xType = yType;
-                if (y.Has(xType)) yType = xType;
+        private bool TryGetExpr(IValue x, Type xType, IValue y, Type yType,
+                                ref CSharpExpr expr)
+        {
+            if (!x.Has(xType) || !y.Has(yType)) {
+                return false;
             }
-
             var xDummy = Expression.Parameter(xType);
             var yDummy = Expression.Parameter(yType);
             Type type;
             try {
                 type = Expression.MakeBinary(Operator, xDummy, yDummy).Type;
             } catch (InvalidOperationException) {
-                throw Error.OperatorNotApplicable(this, x.Type, y.Type);
+                return false;
             }
-            string xCode = x.Get(xType).Code;
-            string yCode = y.Get(yType).Code;
-            return new CSharpExpr($"({xCode} {CSharp} {yCode})", type);
+            expr = new CSharpExpr(
+                $"({x.Get(xType).Code} {CSharp} {y.Get(yType).Code})", type);
+            return true;
         }
     }
 }
