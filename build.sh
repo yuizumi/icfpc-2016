@@ -10,13 +10,15 @@ declare -ar REFS=(
     /r:System.Numerics
 )
 
-_nf() {
+_nf() (
+    set -x
     mono --debug nflat/bin/nf.exe "${DEPS[@]}" "$@"
-}
+)
 
-_mcs() {
+_mcs() (
+    set -x
     mcs /debug+ "${DEPS[@]}" "${REFS[@]}" "$@"
-}
+)
 
 cd "${0%/*}"
 mkdir -p bin
@@ -29,5 +31,11 @@ done
 _nf alias/*.nf src/basic.nf > bin/basic.cs
 _mcs /debug+ /t:library bin/basic.cs
 
+_nf alias/*.nf src/geom.nf > bin/geom.cs
+_mcs /debug+ /t:library bin/geom.cs
+
 _nf /r:bin/basic.dll alias/*.nf src/{json,fetch}.nf > bin/fetch.cs
 _mcs /debug+ /r:bin/basic.dll bin/fetch.cs
+
+_nf /r:bin/geom.dll alias/*.nf src/xyswap.nf > bin/xyswap.cs
+_mcs /debug+ /r:bin/geom.dll bin/xyswap.cs

@@ -4,6 +4,7 @@
 
 短整数型は　|T:System.Int16|の　別名
 整数型は　|T:System.Int32|の　別名
+　　変換は　|Parse|の　別名
 長整数型は　|T:System.Int64|の　別名
 
 符号無し短整数型は　|T:System.UInt16|の　別名
@@ -21,6 +22,8 @@
 文字列型は　|T:System.String|の　別名
 　　連結は　|Concat|の　別名
 　　整形は　|Format|の　別名
+　　分割は　|Split|の　別名
+　　文字型配列変換は　|ToCharArray|の　別名
 
 オブジェクト型は　|T:System.Object|の　別名
 　　文字列化は　|ToString|の　別名
@@ -31,6 +34,7 @@
 ※　その他
 
 コンソールは　|T:System.Console|の　別名
+　　一行読出は　|ReadLine|の　別名
 　　表示は　|Write|（１引数）の　別名
 　　改行は　|WriteLine|（０引数）の　別名
 　　表示改行は　|WriteLine|（１引数）の　別名
