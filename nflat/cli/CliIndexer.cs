@@ -20,14 +20,15 @@ namespace NFlat.Micro
         internal override ParameterInfo[] GetParameters()
             => mIndexer.GetIndexParameters();
 
-        internal CSharpExpr GetExpression(IValue instance, CliArguments args)
+        internal IValue GetForIndex(IValue instance, CliArguments args)
         {
             IEnumerable<string> indexes = Enumerable.Zip(
                 GetParameters(), args.Get(GetArity()),
                 (param, arg) => arg.Get(param.ParameterType).Code);
             string joined = String.Join(", ", indexes);
-            return new CSharpExpr(
+            var expr = new CSharpExpr(
                 $"{instance.Get(DeclaringType)}[{joined}]", mIndexer.PropertyType);
+            return new Indexed(expr, mIndexer.CanWrite);
         }
     }
 }

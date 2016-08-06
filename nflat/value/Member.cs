@@ -17,7 +17,7 @@ namespace NFlat.Micro
 
         protected override string Code => $"{Instance.Code}.{MemberInfo.Name}";
 
-        public override bool IsStable => DeclaringType.IsValueType;
+        public override bool IsStable => false;
         public override string Message => MemberInfo.FullName();
 
         private Type DeclaringType => MemberInfo.DeclaringType;

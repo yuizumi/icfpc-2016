@@ -34,9 +34,10 @@ namespace NFlat.Micro
             return new CliIndexerGroup(indexers);
         }
 
-        public CSharpExpr GetForIndex(IValue instance, CliArguments args)
+
+        public IValue GetForIndex(IValue instance, CliArguments args)
         {
-            return CliHelper.Resolve(mIndexers, args).GetExpression(instance, args);
+            return CliHelper.Resolve(mIndexers, args).GetForIndex(instance, args);
         }
     }
 }

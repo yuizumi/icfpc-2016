@@ -23,15 +23,16 @@ namespace NFlat.Micro
 
         public ITypeMember NonStatic() => this;
 
-        public CSharpExpr GetForIndex(IValue instance, CliArguments args)
+        public IValue GetForIndex(IValue instance, CliArguments args)
         {
             if (!args.Has(mArrayType.GetArrayRank()))
                 throw Error.DimensionMismatch(instance);
             IEnumerable<string> indexes = args.Get(mArrayType.GetArrayRank())
                 .Select(arg => arg.Get(typeof(int)).Code);
             string joined = String.Join(", ", indexes);
-            return new CSharpExpr(
+            var expr = new CSharpExpr(
                 $"{instance.Get(mArrayType)}[{joined}]", mArrayType.GetElementType());
+            return new Indexed(expr, true);
         }
     }
 }

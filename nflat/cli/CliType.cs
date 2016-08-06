@@ -30,7 +30,7 @@ namespace NFlat.Micro
 
         internal override string Text => $"|T:{Type}|";
 
-        public CSharpExpr GetForIndex(IValue instance, CliArguments args)
+        public IValue GetForIndex(IValue instance, CliArguments args)
         {
             if (mIndexer == null) throw Error.NotIndexer(instance);
             return mIndexer.GetForIndex(instance, args);

@@ -22,7 +22,7 @@ namespace NFlat.Micro
                 .ThrowOnNull(Error.NotIndexer(value));
             var args = new FixedArguments(
                 mArgs.Select(x => Resolve(ctx, x)).ToList().AsReadOnly());
-            ctx.Output.Emit(indexer.GetForIndex(value, args));
+            ctx.Stack.Push(indexer.GetForIndex(value, args));
         }
 
         private IValue Resolve(ICompileContext ctx, ICommand command)
