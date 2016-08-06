@@ -34,6 +34,8 @@
 ※　その他
 
 コンソールは　|T:System.Console|の　別名
+　　標準入力は　|In|の　別名
+　　標準出力は　|Out|の　別名
 　　一行読出は　|ReadLine|の　別名
 　　表示は　|Write|（１引数）の　別名
 　　改行は　|WriteLine|（０引数）の　別名

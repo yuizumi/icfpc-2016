@@ -34,8 +34,14 @@ _mcs /debug+ /t:library bin/basic.cs
 _nf alias/*.nf src/geom.nf > bin/geom.cs
 _mcs /debug+ /t:library bin/geom.cs
 
-_nf /r:bin/basic.dll alias/*.nf src/{json,fetch}.nf > bin/fetch.cs
-_mcs /debug+ /r:bin/basic.dll bin/fetch.cs
+_nf alias/*.nf src/json.nf > bin/json.cs
+_mcs /debug+ /t:library bin/json.cs
+
+_nf /r:bin/basic.dll /r:bin/json.dll alias/*.nf src/fetch.nf > bin/fetch.cs
+_mcs /debug+ /r:bin/basic.dll /r:bin/json.dll bin/fetch.cs
+
+_nf /r:bin/json.dll alias/*.nf src/findme.nf > bin/findme.cs
+_mcs /debug+ /r:bin/json.dll bin/findme.cs
 
 _nf /r:bin/geom.dll alias/*.nf src/xyswap.nf > bin/xyswap.cs
 _mcs /debug+ /r:bin/geom.dll bin/xyswap.cs
