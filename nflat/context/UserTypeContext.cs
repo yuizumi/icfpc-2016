@@ -25,7 +25,7 @@ namespace NFlat.Micro
         {
             if (UserType.Type.IsStatic() && hasThis)
                 throw Error.NonStaticMemberInModule();
-            var ctxMethod = new MethodContext(this, name, Source.NextBlock());
+            var ctxMethod = new MethodContext(this, name, Source.NextBlock(), hasThis);
             ctxMethod.Compile();
             ctxMethod.Return();
             NFType.AddMember(name, new UserMethod(ctxMethod, hasThis));

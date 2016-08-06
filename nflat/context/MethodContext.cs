@@ -7,7 +7,7 @@ namespace NFlat.Micro
     internal class MethodContext : CompileContext
     {
         internal MethodContext(TypeContext parent, Identifier name,
-                               IParsedSource source)
+                               IParsedSource source, bool hasThis)
             : base(parent, name.Text, source)
         {
             source.Peek().ThrowOnNull(Error.MissingBody(name.Text));
@@ -15,6 +15,7 @@ namespace NFlat.Micro
             Parameters = ParseParameters(parent, source);
             ReturnType = ParseReturnType(parent, source);
             Identifier = name;
+            HasThis = hasThis;
 
             Output = new OuterExprBuilder(this);
 
@@ -25,7 +26,9 @@ namespace NFlat.Micro
 
         internal IReadOnlyList<CSharpExpr> Parameters { get; }
         internal Type ReturnType { get; }
+
         internal Identifier Identifier { get; }
+        internal bool HasThis { get; }
 
         internal override void Break(ICompileContext subctx)
         {
@@ -57,6 +60,12 @@ namespace NFlat.Micro
             if (ReturnType != returnType)
                 throw Error.InconsistentReturnType();
             subctx.Stack.MarkAsUnused();
+        }
+
+        public override CSharpExpr GetSelf()
+        {
+            if (!HasThis) throw Error.SelfNotDefined();
+            return new CSharpExpr("this", (Parent as TypeContext).NFType.Type);
         }
 
         private static IReadOnlyList<CSharpExpr> ParseParameters(

@@ -40,6 +40,8 @@ namespace NFlat.Micro
         internal override void Break(ICompileContext subctx) => Fail();
         internal override void Continue(ICompileContext subctx) => Fail();
 
+        public override CSharpExpr GetSelf() { throw new NFlatBugException(); }
+
         private static void Fail() { throw new NFlatBugException(); }
     }
 }

@@ -165,6 +165,9 @@ namespace NFlat.Micro
         internal static NFlatException OutsideLoop(Stem stem) =>
             _($"「{stem.Text}」を繰り返しの外側で使うことはできません。");
 
+        internal static NFlatException SelfNotDefined() =>
+            _($"「{Self._Text}」をここで使用することはできません。");
+
         internal static NFlatException TypeNotConvertible(Type src, Type dst) =>
             _($"|T:{src}| を |T:{dst}| に変換することはできません。");
 

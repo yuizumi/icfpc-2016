@@ -21,5 +21,8 @@ namespace NFlat.Micro
 
         internal override void Continue(ICompileContext subctx)
             => (Parent as CompileContext).Continue(subctx);
+
+        public override CSharpExpr GetSelf()
+            => (Parent as CompileContext).GetSelf();
     }
 }

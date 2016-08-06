@@ -26,5 +26,10 @@ namespace NFlat.Micro
         {
             throw Error.InvalidCall(this, new Continue());
         }
+
+        public override CSharpExpr GetSelf()
+        {
+            throw Error.InvalidCall(this, new Self());
+        }
     }
 }

@@ -41,6 +41,8 @@ namespace NFlat.Micro
         internal abstract void Break(ICompileContext subctx);
         internal abstract void Continue(ICompileContext subctx);
 
+        public abstract CSharpExpr GetSelf();
+
         public ICompileContext CondContext(string name)
         {
             Stack.ForceLocalize();

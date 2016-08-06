@@ -22,6 +22,9 @@ namespace NFlat.Micro
         internal override void Continue(ICompileContext subctx)
             => EmitCode(subctx, "continue;");
 
+        public override CSharpExpr GetSelf()
+            => (Parent as CompileContext).GetSelf();
+
         private void EmitCode(ICompileContext subctx, string code)
         {
             subctx.Stack.ForceLocalize();

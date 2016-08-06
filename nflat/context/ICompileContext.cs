@@ -13,6 +13,8 @@ namespace NFlat.Micro
         void Break();
         void Continue();
 
+        CSharpExpr GetSelf();
+
         ICompileContext CondContext(string name);
         ICompileContext LoopContext(string name);
         ICompileContext InitContext(string name);
