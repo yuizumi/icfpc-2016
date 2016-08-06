@@ -46,16 +46,14 @@ namespace NFlat.Micro
             var files = new List<string>();
 
             for (int i = 0; i < args.Length; i++) {
-                switch (Path.GetExtension(args[i]).ToLower()) {
-                    case ".nf":
-                        files.Add(args[i]);
-                        break;
-                    case ".dll":
-                        Assembly.LoadFile(args[i]);
-                        break;
-                    default:
-                        throw new CommandLineException($"{args[i]}: 拡張子が正しくありません。");
+                if (args[i].StartsWith("/r:")) {
+                    Assembly.LoadFile(args[i].Substring(3));
+                    continue;
                 }
+                if (!args[i].ToLower().EndsWith(".nf")) {
+                    throw new CommandLineException($"{args[i]}: 拡張子が正しくありません。");
+                }
+                files.Add(args[i]);
             }
 
             if (files.Count == 0) {
