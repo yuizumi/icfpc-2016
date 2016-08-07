@@ -45,3 +45,6 @@ _mcs /debug+ /r:bin/json.dll bin/findme.cs
 
 _nf /r:bin/geom.dll alias/*.nf src/xyswap.nf > bin/xyswap.cs
 _mcs /debug+ /r:bin/geom.dll bin/xyswap.cs
+
+_nf /r:bin/geom.dll alias/*.nf src/rotate.nf > bin/rotate.cs
+_mcs /debug+ /r:bin/geom.dll bin/rotate.cs
