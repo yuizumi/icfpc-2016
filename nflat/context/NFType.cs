@@ -70,6 +70,10 @@ namespace NFlat.Micro
             if (Members.TryGetValue(name, out member)) {
                 return member;
             }
+            var csname = Identifier.Of(name.CSharp);
+            if (Members.TryGetValue(csname, out member)) {
+                return member;
+            }
             if (Type.IsConstructedGenericType) {
                 var genType = Owner.Get(Type.GetGenericTypeDefinition());
                 var genMember = genType.Members.Get(name) as CliGeneric;
