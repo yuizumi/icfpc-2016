@@ -23,17 +23,14 @@ bin/origami.dll: bin/geom.dll bin/piece.dll
 bin/piece.cs: bin/geom.dll
 bin/piece.dll: bin/geom.dll
 
-bin/probutil.cs: bin/geom.dll
-bin/probutil.dll: bin/geom.dll
-
 bin/solver.cs: bin/geom.dll bin/origami.dll
 bin/solver.exe: bin/geom.dll bin/origami.dll
 
-bin/rotate.cs: bin/probutil.dll bin/geom.dll
-bin/rotate.exe: bin/probutil.dll bin/geom.dll
+bin/rotate.cs: bin/geom.dll
+bin/rotate.exe: bin/geom.dll
 
-bin/xyswap.cs: bin/probutil.dll bin/geom.dll
-bin/xyswap.exe: bin/probutil.dll bin/geom.dll
+bin/xyswap.cs: bin/geom.dll
+bin/xyswap.exe: bin/geom.dll
 
 bin/Newtonsoft.Json.dll: $(JSON_NET_DLL)
 	ln $< $@
