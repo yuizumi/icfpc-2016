@@ -33,6 +33,9 @@
 
 ※　コレクション
 
+配列型は　|T:System.Array|の　別名
+　　長さは　|Length|の　別名
+
 列は　|T:System.Collections.Generic.IEnumerable`1|の　別名
 
 コレクションは　|T:System.Collections.Generic.ICollection`1|の　別名
@@ -61,7 +64,14 @@
 　　改行は　|WriteLine|（０引数）の　別名
 　　表示改行は　|WriteLine|（１引数）の　別名
 
+環境型は　|T:System.Environment|の　別名
+　　コマンドライン引数取得は　|GetCommandLineArgs|の　別名
+　　プログラム終了は　|Exit|の　別名
+
 基本例外型は　|T:System.Exception|の　別名
+
+型オブジェクト型は　|T:System.Type|の　別名
+　　メソッド情報を取得は　|GetMethod|の　別名
 
 ファイルは　|T:System.IO.File|の　別名
 　　存在は　|Exists|の　別名
@@ -84,3 +94,6 @@
 　　書出は　|Write|（１引数）の　別名
 　　改行は　|WriteLine|（０引数）の　別名
 　　改行付書出は　|WriteLine|（１引数）の　別名
+
+メソッド情報型は　|T:System.Reflection.MethodInfo|の　別名
+　　呼び出すは　|Invoke|の　別名
