@@ -20,20 +20,20 @@ bin/findme.exe: bin/basic.dll bin/json.dll
 bin/polygon.cs: bin/geom.dll
 bin/polygon.dll: bin/geom.dll
 
-bin/rotate.cs: bin/geom.dll
-bin/rotate.exe: bin/geom.dll
+bin/probutil.cs: bin/geom.dll
+bin/probutil.dll: bin/geom.dll
 
-bin/xyswap.cs: bin/geom.dll
-bin/xyswap.exe: bin/geom.dll
+bin/rotate.cs: bin/probutil.dll bin/geom.dll
+bin/rotate.exe: bin/probutil.dll bin/geom.dll
+
+bin/xyswap.cs: bin/probutil.dll bin/geom.dll
+bin/xyswap.exe: bin/probutil.dll bin/geom.dll
 
 bin/Newtonsoft.Json.dll: $(JSON_NET_DLL)
 	ln $< $@
 
 bin/Rationals.dll: $(RATIONALS_DLL)
 	ln $< $@
-
-packages/%.dll: packages/packages.config
-	(cd packages; nuget install)
 
 bin/%.cs: $(DEPS) alias/*.nf src/%.nf
 	mono --debug nflat/bin/nf.exe $(^:%.dll=/r:%.dll) > $@
