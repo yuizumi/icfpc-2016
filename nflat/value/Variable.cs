@@ -2,7 +2,7 @@ using System;
 
 namespace NFlat.Micro
 {
-    internal class Variable : Value, ICompileCommand
+    internal class Variable : Value, INamedValue, ICompileCommand
     {
         internal Variable(CSharpExpr expr, Identifier name)
         {
@@ -14,7 +14,7 @@ namespace NFlat.Micro
         protected override string Code { get; }
         public override Type Type { get; }
 
-        internal Identifier Name { get; }
+        public Identifier Name { get; }
 
         public override bool IsAssignable => true;
         public override bool IsStable => Type.IsValueType;

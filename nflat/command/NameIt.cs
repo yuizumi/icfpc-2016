@@ -1,8 +1,8 @@
 namespace NFlat.Micro
 {
-    internal class AssignNew : Keyword, ICompileCommand
+    internal class NameIt : Keyword, ICompileCommand
     {
-        internal const string _Text = "新しい変数に入れる";
+        internal const string _Text = "名付ける";
         internal override string Text => _Text;
 
         internal override ICommand Parse() => this;
@@ -18,10 +18,9 @@ namespace NFlat.Micro
             var name = (target as Undefined).Name;
             ctx.Stack.ForceEvaluate();
             var src = ctx.Stack.Pop();
-            var dst = new CSharpExpr(name.CSharp, src.Type);
-            ctx.Output.RawEmit($"{CSharpString.Type(src.Type)} {dst.Code};");
+            var dst = ctx.Output.MakeVariable(src.Type);
             ctx.Output.RawEmit($"{dst.Code} = {src.Get(src.Type)};");
-            ctx.Bindings.Define(name, new Variable(dst, name));
+            ctx.Bindings.Define(name, new NamedLocal(dst, name));
         }
 
         private NFlatException GetError(IValue target)
