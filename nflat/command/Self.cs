@@ -8,7 +8,9 @@ namespace NFlat.Micro
 
         public void Compile(ICompileContext ctx)
         {
-            ctx.Stack.Push(new Local(ctx.GetSelf()));
+            var expr = ctx.GetSelf();
+            if (expr.Code == null) throw Error.SelfNotDefined();
+            ctx.Stack.Push(new Local(expr));
         }
     }
 }

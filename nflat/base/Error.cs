@@ -45,6 +45,9 @@ namespace NFlat.Micro
             }
         }
 
+        internal static NFlatException InstanceMemberFromStatic() =>
+            _($"インスタンスのメンバーをここで使用することはできません。");
+
         internal static NFlatException InsufficientValues() =>
             _($"値が不足しています。");
 

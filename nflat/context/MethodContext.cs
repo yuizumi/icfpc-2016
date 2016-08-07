@@ -64,8 +64,10 @@ namespace NFlat.Micro
 
         public override CSharpExpr GetSelf()
         {
-            if (!HasThis) throw Error.SelfNotDefined();
-            return new CSharpExpr("this", (Parent as TypeContext).NFType.Type);
+            if (HasThis) {
+                return new CSharpExpr("this", (Parent as TypeContext).NFType.Type);
+            }
+            return default(CSharpExpr);
         }
 
         private static IReadOnlyList<CSharpExpr> ParseParameters(

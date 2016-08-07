@@ -9,8 +9,18 @@ namespace NFlat.Micro
         internal static CSharpExpr GetThisObject(UserMember member, ICompileContext ctx)
         {
             Type type = member.Owner.Type;
-            return (member.HasThis)
-                ? ctx.Stack.Pop().Get(type) : new CSharpExpr(CSharpString.Type(type), null);
+            if (!member.HasThis) {
+                return new CSharpExpr(CSharpString.Type(type), null);
+            }
+
+            if (ctx.Stack.Count > 0 && ctx.Stack.Peek().Has(type)) {
+                return ctx.Stack.Pop().Get(type);
+            } else {
+                CSharpExpr self = ctx.GetSelf();
+                if (self.Code == null) throw Error.InstanceMemberFromStatic();
+                ErrorHelper.Ensure(type == self.Type);
+                return self;
+            }
         }
 
         internal static string MakeArguments(IEnumerable<CSharpExpr> parameters,
