@@ -11,11 +11,11 @@ all: $(TARGETS)
 clean:
 	-rm -fr bin/*.cs bin/*.dll bin/*.mdb bin/*.exe
 
-bin/fetch.cs: bin/basic.dll bin/json.dll
-bin/fetch.exe: bin/basic.dll bin/json.dll
+bin/fetch.cs: bin/restlib.dll
+bin/fetch.exe: bin/restlib.dll
 
-bin/findme.cs: bin/basic.dll bin/json.dll
-bin/findme.exe: bin/basic.dll bin/json.dll
+bin/findme.cs: bin/restlib.dll
+bin/findme.exe: bin/restlib.dll
 
 bin/origami.cs: bin/geom.dll bin/piece.dll
 bin/origami.dll: bin/geom.dll bin/piece.dll

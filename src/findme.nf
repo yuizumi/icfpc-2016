@@ -1,4 +1,4 @@
-JSON関数群は　|T:JSON関数群,json|の　別名
+JSON関数群は　|T:JSON関数群,restlib|の　別名
 
 プログラムは　モジュール
 　　コンソールを　使用
