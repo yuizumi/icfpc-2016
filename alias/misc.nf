@@ -6,6 +6,9 @@
 割った余りは　余りの　別名
 返すは　無処理の　別名
 
+どちらも真は　ＡＮＤの　別名
+どちらかが真は　ＯＲの　別名
+
 ※　Newtonsoft.Json.dll
 JSON型は　|T:Newtonsoft.Json.Linq.JToken,Newtonsoft.Json|の　別名
 　　変換は　|Parse|の　別名
