@@ -1,4 +1,4 @@
-TARGETS=bin/fetch.exe bin/findme.exe bin/rotate.exe bin/xyswap.exe
+TARGETS=bin/fetch.exe bin/findme.exe bin/rotate.exe bin/solver.exe bin/xyswap.exe
 
 DEPS=bin/Newtonsoft.Json.dll bin/Rationals.dll
 REFS=System.Numerics
@@ -17,11 +17,17 @@ bin/fetch.exe: bin/basic.dll bin/json.dll
 bin/findme.cs: bin/basic.dll bin/json.dll
 bin/findme.exe: bin/basic.dll bin/json.dll
 
+bin/origami.cs: bin/geom.dll bin/piece.dll
+bin/origami.dll: bin/geom.dll bin/piece.dll
+
 bin/piece.cs: bin/geom.dll
 bin/piece.dll: bin/geom.dll
 
 bin/probutil.cs: bin/geom.dll
 bin/probutil.dll: bin/geom.dll
+
+bin/solver.cs: bin/origami.dll
+bin/solver.exe: bin/origami.dll
 
 bin/rotate.cs: bin/probutil.dll bin/geom.dll
 bin/rotate.exe: bin/probutil.dll bin/geom.dll

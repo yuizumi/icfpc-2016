@@ -34,12 +34,21 @@
 ※　コレクション
 
 列は　|T:System.Collections.Generic.IEnumerable`1|の　別名
+
 コレクションは　|T:System.Collections.Generic.ICollection`1|の　別名
 　　追加は　|Add|の　別名
+　　クリアは　|Clear|の　別名
+　　含む？は　|Contains|の　別名
 　　要素数は　|Count|の　別名
+
 リストは　|T:System.Collections.Generic.IList`1|の　別名
 
 リスト型は　|T:System.Collections.Generic.List`1|の　別名
+　　まとめて追加は　|AddRange|の　別名
+　　逆順は　|Reverse|の　別名
+
+辞書型は　|T:System.Collections.Generic.Dictionary`2|の　別名
+　　キー存在？は　|ContainsKey|の　別名
 
 
 ※　その他
@@ -63,6 +72,8 @@
 ストリーム入力型は　|T:System.IO.StreamReader|の　別名
 
 ストリーム出力型は　|T:System.IO.StreamWriter|の　別名
+
+文字列出力型は　|T:System.IO.StringWriter|の　別名
 
 テキスト入力型は　|T:System.IO.TextReader|の　別名
 　　閉じるは　|Close|の　別名
