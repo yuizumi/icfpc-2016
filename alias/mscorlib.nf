@@ -31,6 +31,17 @@
 実数型は　倍精度実数型の　別名
 
 
+※　コレクション
+
+列は　|T:System.Collections.Generic.IEnumerable`1|の　別名
+コレクションは　|T:System.Collections.Generic.ICollection`1|の　別名
+　　追加は　|Add|の　別名
+　　要素数は　|Count|の　別名
+リストは　|T:System.Collections.Generic.IList`1|の　別名
+
+リスト型は　|T:System.Collections.Generic.List`1|の　別名
+
+
 ※　その他
 
 コンソールは　|T:System.Console|の　別名

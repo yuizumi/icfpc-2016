@@ -31,11 +31,14 @@ done
 _nf alias/*.nf src/basic.nf > bin/basic.cs
 _mcs /debug+ /t:library bin/basic.cs
 
+_nf alias/*.nf src/json.nf > bin/json.cs
+_mcs /debug+ /t:library bin/json.cs
+
 _nf alias/*.nf src/geom.nf > bin/geom.cs
 _mcs /debug+ /t:library bin/geom.cs
 
-_nf alias/*.nf src/json.nf > bin/json.cs
-_mcs /debug+ /t:library bin/json.cs
+_nf /r:bin/geom.dll alias/*.nf src/polygon.nf > bin/polygon.cs
+_mcs /debug+ /r:bin/geom.dll /t:library bin/polygon.cs
 
 _nf /r:bin/basic.dll /r:bin/json.dll alias/*.nf src/fetch.nf > bin/fetch.cs
 _mcs /debug+ /r:bin/basic.dll /r:bin/json.dll bin/fetch.cs
