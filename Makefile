@@ -17,8 +17,8 @@ bin/fetch.exe: bin/basic.dll bin/json.dll
 bin/findme.cs: bin/basic.dll bin/json.dll
 bin/findme.exe: bin/basic.dll bin/json.dll
 
-bin/polygon.cs: bin/geom.dll
-bin/polygon.dll: bin/geom.dll
+bin/piece.cs: bin/geom.dll
+bin/piece.dll: bin/geom.dll
 
 bin/probutil.cs: bin/geom.dll
 bin/probutil.dll: bin/geom.dll
