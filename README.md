@@ -5,6 +5,8 @@ you read Japanese langauge.
 The *real* source -- the source of my points -- can be found at [Google Drive]
 (https://drive.google.com/drive/folders/0Bw_bA_jVTQrWcV9JRzB4ZGZybk0).
 
+A related blog post is at http://d.hatena.ne.jp/yuizumi/20160808 (in Japanese).
+
 
 ## How to Build
 
